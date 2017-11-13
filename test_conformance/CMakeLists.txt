@@ -1,3 +1,11 @@
+cmake_minimum_required(VERSION 3.0)
+
+project(OpenCL-CTS C CXX)
+
+add_compile_options(-fPIC -Wno-narrowing -fpermissive)
+
+set(CLConform_LIBRARIES OpenCL m pthread)
+
 add_subdirectory(allocations)
 add_subdirectory(api)
 add_subdirectory(atomics)
@@ -13,9 +21,7 @@ add_subdirectory(events)
 add_subdirectory(geometrics)
 add_subdirectory(half)
 add_subdirectory(headers)
-add_subdirectory(headers_c99)
 add_subdirectory(images)
-add_subdirectory(implicit_convert)
 add_subdirectory(integer_ops)
 add_subdirectory(math_brute_force)
 add_subdirectory(multiple_device_context)

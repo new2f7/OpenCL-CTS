@@ -1,10 +1,18 @@
 add_executable(conformance_test_cl_copy_images
         main.cpp 
-		test_copy_2D.cpp 
-		../image_helpers.cpp  
-		test_loops.cpp 
-		test_copy_3D.cpp 
-		test_copy_2D_3D.cpp 
+
+        test_copy_generic.cpp
+        test_copy_1D.cpp
+		test_copy_2D.cpp
+		../image_helpers.cpp 
+		test_loops.cpp
+		test_copy_3D.cpp
+        test_copy_1D_array.cpp
+        test_copy_2D_array.cpp
+		test_copy_2D_3D.cpp
+        test_copy_2D_2D_array.cpp
+        test_copy_3D_2D_array.cpp
+
 		  ../../../test_common/harness/testHarness.c 
 		  ../../../test_common/harness/errorHelpers.c 
 		  ../../../test_common/harness/threadTesting.c 
@@ -17,11 +25,19 @@ add_executable(conformance_test_cl_copy_images
 
 set_source_files_properties(
         main.cpp 
-		test_copy_2D.cpp 
-		../image_helpers.cpp  
-		test_loops.cpp 
-		test_copy_3D.cpp 
-		test_copy_2D_3D.cpp 
+
+        test_copy_generic.cpp 
+        test_copy_1D.cpp 
+                test_copy_2D.cpp 
+                ../image_helpers.cpp  
+                test_loops.cpp 
+                test_copy_3D.cpp 
+        test_copy_1D_array.cpp 
+        test_copy_2D_array.cpp 
+                test_copy_2D_3D.cpp 
+        test_copy_2D_2D_array.cpp 
+        test_copy_3D_2D_array.cpp 
+
 		  ../../../test_common/harness/testHarness.c 
 		  ../../../test_common/harness/errorHelpers.c 
 		  ../../../test_common/harness/threadTesting.c 

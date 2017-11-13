@@ -1,3 +1,4 @@
+
 add_executable(conformance_test_events
         main.c
 	test_events.cpp
@@ -10,6 +11,7 @@ add_executable(conformance_test_events
 	../../test_common/harness/genericThread.cpp
 	../../test_common/harness/errorHelpers.c
 	../../test_common/harness/threadTesting.c
+        ../../test_common/harness/ThreadPool.c
 	../../test_common/harness/testHarness.c
 	../../test_common/harness/kernelHelpers.c
 	../../test_common/harness/typeWrappers.cpp
@@ -27,6 +29,7 @@ set_source_files_properties(
 	../../test_common/harness/genericThread.cpp
 	../../test_common/harness/errorHelpers.c
 	../../test_common/harness/threadTesting.c
+	../../test_common/harness/ThreadPool.c
 	../../test_common/harness/testHarness.c
 	../../test_common/harness/kernelHelpers.c
 	../../test_common/harness/conversions.c

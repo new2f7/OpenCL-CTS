@@ -1,9 +1,13 @@
 add_executable(conformance_test_samplerless_reads
         main.cpp  
-		test_iterations.cpp  
-		test_loops.cpp  
-		test_read_3D.cpp  
-		../image_helpers.cpp   
+		test_iterations.cpp
+		test_loops.cpp
+        test_read_1D.cpp
+        test_read_1D_buffer.cpp
+        test_read_1D_array.cpp
+        test_read_2D_array.cpp
+		test_read_3D.cpp
+		../image_helpers.cpp
 		../../../test_common/harness/errorHelpers.c  
 		../../../test_common/harness/threadTesting.c  
 		../../../test_common/harness/kernelHelpers.c  
@@ -17,10 +21,15 @@ add_executable(conformance_test_samplerless_reads
 
 set_source_files_properties(
 	main.cpp  
-		test_iterations.cpp  
-		test_loops.cpp  
-		test_read_3D.cpp  
-		../image_helpers.cpp   
+                test_iterations.cpp 
+                test_loops.cpp 
+        test_read_1D.cpp 
+        test_read_1D_buffer.cpp 
+        test_read_1D_array.cpp 
+        test_read_2D_array.cpp 
+                test_read_3D.cpp 
+                ../image_helpers.cpp  
+
 		../../../test_common/harness/errorHelpers.c  
 		../../../test_common/harness/threadTesting.c  
 		../../../test_common/harness/kernelHelpers.c  

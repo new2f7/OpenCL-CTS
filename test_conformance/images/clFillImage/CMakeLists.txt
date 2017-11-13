@@ -1,10 +1,15 @@
 add_executable(conformance_test_cl_fill_images
+
         main.cpp 
-		test_fill_2D.cpp 
-		../image_helpers.cpp  
-		test_loops.cpp 
-		test_fill_3D.cpp 
-		test_fill_2D_3D.cpp 
+        test_fill_generic.cpp
+		test_fill_1D.cpp
+		test_fill_2D.cpp
+		test_fill_3D.cpp
+        test_fill_1D_array.cpp
+        test_fill_2D_array.cpp
+		test_loops.cpp
+		../image_helpers.cpp
+
 		  ../../../test_common/harness/testHarness.c 
 		  ../../../test_common/harness/errorHelpers.c 
 		  ../../../test_common/harness/threadTesting.c 
@@ -16,12 +21,17 @@ add_executable(conformance_test_cl_fill_images
           ../../../test_common/harness/msvc9.c)
 
 set_source_files_properties(
+
         main.cpp 
-		test_fill_2D.cpp 
-		../image_helpers.cpp  
-		test_loops.cpp 
-		test_fill_3D.cpp 
-		test_fill_2D_3D.cpp 
+        test_fill_generic.cpp 
+                test_fill_1D.cpp 
+                test_fill_2D.cpp 
+                test_fill_3D.cpp 
+        test_fill_1D_array.cpp 
+        test_fill_2D_array.cpp 
+                test_loops.cpp 
+                ../image_helpers.cpp  
+
 		  ../../../test_common/harness/testHarness.c 
 		  ../../../test_common/harness/errorHelpers.c 
 		  ../../../test_common/harness/threadTesting.c 

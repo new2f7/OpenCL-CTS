@@ -1,13 +1,14 @@
 add_executable(conformance_test_integer_ops
         main.c
-	test_int_basic_ops.c
-	test_integers.cpp
-	test_upsample.cpp
-	test_intmul24.c test_intmad24.c
-	test_sub_sat.c test_add_sat.c
-	test_abs.c test_absdiff.c
-    test_unary_ops.cpp
-    verification_and_generation_functions.c
+			test_popcount.c
+			test_int_basic_ops.c
+			test_integers.cpp
+			test_upsample.cpp
+			test_intmul24.c test_intmad24.c
+			test_sub_sat.c test_add_sat.c
+			test_abs.c test_absdiff.c
+			test_unary_ops.cpp
+			verification_and_generation_functions.c
 	../../test_common/harness/ThreadPool.c
 	../../test_common/harness/mt19937.c
 	../../test_common/harness/conversions.c
@@ -20,12 +21,15 @@ add_executable(conformance_test_integer_ops
 
 set_source_files_properties(
         main.c
-	test_int_basic_ops.c 
-	test_intmul24.c test_intmad24.c
-	test_sub_sat.c test_add_sat.c
-	test_abs.c test_absdiff.c
-    test_unary_ops.cpp
-    verification_and_generation_functions.c
+                        test_popcount.c 
+                        test_int_basic_ops.c 
+                        test_integers.cpp 
+                        test_upsample.cpp 
+                        test_intmul24.c test_intmad24.c 
+                        test_sub_sat.c test_add_sat.c 
+                        test_abs.c test_absdiff.c  
+                        test_unary_ops.cpp 
+                        verification_and_generation_functions.c 
 	../../test_common/harness/ThreadPool.c
 	../../test_common/harness/conversions.c
 	../../test_common/harness/errorHelpers.c
@@ -34,24 +38,6 @@ set_source_files_properties(
 	../../test_common/harness/kernelHelpers.c
     ../../test_common/harness/msvc9.c
         PROPERTIES LANGUAGE CXX)
-if (NOT CMAKE_CL_64 AND NOT MSVC)                   
-set_source_files_properties(
-        main.c
-	test_int_basic_ops.c 
-	test_intmul24.c test_intmad24.c
-	test_sub_sat.c test_add_sat.c
-	test_abs.c test_absdiff.c
-    test_unary_ops.cpp
-    verification_and_generation_functions.c
-	../../test_common/harness/ThreadPool.c
-	../../test_common/harness/conversions.c
-	../../test_common/harness/errorHelpers.c
-	../../test_common/harness/threadTesting.c
-	../../test_common/harness/testHarness.c
-	../../test_common/harness/kernelHelpers.c
-    ../../test_common/harness/msvc9.c
-         COMPILE_FLAGS -march=i686)
-endif (NOT CMAKE_CL_64 AND NOT MSVC)
 
 TARGET_LINK_LIBRARIES(conformance_test_integer_ops
         ${CLConform_LIBRARIES})

@@ -1,9 +1,12 @@
 add_executable(conformance_test_kernel_image_methods
         main.cpp  
-		test_2D.cpp  
-		../image_helpers.cpp   
-		test_loops.cpp  
-		test_3D.cpp  
+        test_1D.cpp
+        test_1D_array.cpp
+		test_2D.cpp
+        test_2D_array.cpp
+		../image_helpers.cpp
+		test_loops.cpp
+		test_3D.cpp
 		  ../../../test_common/harness/errorHelpers.c  
 		  ../../../test_common/harness/threadTesting.c  
 		  ../../../test_common/harness/kernelHelpers.c  
@@ -17,10 +20,14 @@ add_executable(conformance_test_kernel_image_methods
 
 set_source_files_properties(
         main.cpp  
-		test_2D.cpp  
-		../image_helpers.cpp   
-		test_loops.cpp  
-		test_3D.cpp  
+        test_1D.cpp 
+        test_1D_array.cpp 
+                test_2D.cpp 
+        test_2D_array.cpp 
+                ../image_helpers.cpp  
+                test_loops.cpp 
+                test_3D.cpp 
+
 		  ../../../test_common/harness/errorHelpers.c  
 		  ../../../test_common/harness/threadTesting.c  
 		  ../../../test_common/harness/kernelHelpers.c  
