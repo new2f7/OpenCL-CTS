@@ -20,17 +20,10 @@ SRCS = main.c test_buffer_copy.c test_buffer_read.c test_buffer_write.c \
 DEFINES = 
 
 SOURCES = $(abspath $(SRCS))
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-FRAMEWORK = $(SOURCES)
-HEADERS = 
+
+include ../../common.mk
+
 TARGET = test_buffers
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -O0 -Wshorten-64-to-32
-CC = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%)
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%)
-LIBRARIES = -framework OpenCL -framework AppKit ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}

@@ -1,8 +1,3 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
-
 SRCS = main.cpp \
 		  mem_host_buffer.cpp  \
 		  mem_host_image.cpp  \
@@ -19,16 +14,10 @@ SRCS = main.cpp \
 DEFINES = DONT_TEST_GARBAGE_POINTERS
 
 SOURCES = $(abspath $(SRCS))
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-HEADERS = 
+
+include ../../common.mk
+
 TARGET = test_mem_host_flags
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -Wshorten-64-to-32
-CC = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-LIBRARIES = -framework OpenCL -framework OpenGL -framework GLUT -framework AppKit ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}
@@ -37,7 +26,7 @@ TARGETOBJECT =
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
+	$(CXX) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)

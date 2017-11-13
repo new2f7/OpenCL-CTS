@@ -1,8 +1,3 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
-
 SRCS = main.cpp \
         test_read_1D.cpp \
         test_read_1D_array.cpp \
@@ -23,18 +18,10 @@ SRCS = main.cpp \
 DEFINES = DONT_TEST_GARBAGE_POINTERS
 
 SOURCES = $(abspath $(SRCS))
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-FRAMEWORK =
-HEADERS = 
+
+include ../../../common.mk
+
 TARGET = test_cl_read_write_images
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -Wshorten-64-to-32 -Os
-CC = c++
-CXX = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-LIBRARIES = -framework OpenCL -framework OpenGL -framework GLUT -framework AppKit ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}

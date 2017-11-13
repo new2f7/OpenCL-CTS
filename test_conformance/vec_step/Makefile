@@ -1,8 +1,3 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
-
 SRCS = 		main.c \
 		structs.c \
 		test_step.c \
@@ -12,23 +7,16 @@ SRCS = 		main.c \
 		../../test_common/harness/threadTesting.c \
 		../../test_common/harness/testHarness.c \
 		../../test_common/harness/kernelHelpers.c \
-                ../../test_common/harness/mt19937.c \
+		../../test_common/harness/mt19937.c \
 		../../test_common/harness/conversions.c 
-		  
+
 DEFINES = 
 
 SOURCES = $(abspath $(SRCS))
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-FRAMEWORK = $(SOURCES)
-HEADERS = 
+
+include ../../common.mk
+
 TARGET = test_vecstep
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -Wshorten-64-to-32 -Os
-CC = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-LIBRARIES = -framework OpenCL -framework OpenGL -framework GLUT -framework AppKit ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}

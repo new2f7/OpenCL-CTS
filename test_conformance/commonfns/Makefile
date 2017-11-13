@@ -17,17 +17,9 @@ SRCS = main.c test_clamp.c test_degrees.c \
 
 SOURCES = $(abspath $(SRCS))
 
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-FRAMEWORK = $(SOURCES)
-HEADERS = 
+include ../../common.mk
+
 TARGET = test_commonfns
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -Wshorten-64-to-32 -Os
-CC = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF}
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-LIBRARIES = -framework OpenCL -framework OpenGL -framework GLUT -framework AppKit ${RC_CFLAGS} ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}

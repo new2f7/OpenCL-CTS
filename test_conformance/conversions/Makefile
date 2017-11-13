@@ -1,21 +1,42 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
-
 # We do not use dependencies in this Makefile
 
-SRCFILES = Sleep.c test_conversions.c  ../../test_common/harness/mt19937.c ../../test_common/harness/ThreadPool.c ../../test_common/harness/rounding_mode.c
+SRCS = Sleep.c \
+			basic_test_conversions.c \
+			 test_conversions.c \
+			 ../../test_common/harness/mt19937.c \
+			 ../../test_common/harness/ThreadPool.c \
+			 ../../test_common/harness/rounding_mode.c
 
-CC = cc
+SOURCES = $(abspath $(SRCS))
 
-CFLAGS = -g -std=c99 -Wall -Wshorten-64-to-32 $(COMPILERFLAGS) \
-         ${RC_CFLAGS} ${USE_ATF}
+DEFINES = 
 
-INCLUDES =  -I../../test_common/harness \
-            ${RC_CFLAGS} ${ATF}
+COMPILERFLAGS = -std=c99
 
-LIBRARIES = -framework OpenCL -framework CoreFoundation -framework IOKit 
+INCLUDE =  -I../../test_common/harness
+
+include ../../common.mk
+
+ifdef LINUX
+
+TARGET = test_conversions
+
+OBJECTS := ${SOURCES:.c=.o}
+OBJECTS := ${OBJECTS:.cpp=.o}
+
+TARGETOBJECT =
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CXX) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
+
+clean:
+	rm -f $(TARGET) $(OBJECTS)
+
+.DEFAULT:
+	@echo The target \"$@\" does not exist in Makefile.
+
+else
 
 release:
 	echo "Build Release"
@@ -48,3 +69,5 @@ test64:	release
 	echo "Testing 64-bit mode conversions for CPU and GPU, which takes a day or three.  Results may be found in cpu64.out and gpu64.out\n"
 
 all: release
+
+endif

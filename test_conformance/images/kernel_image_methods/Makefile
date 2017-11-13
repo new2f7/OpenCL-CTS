@@ -1,8 +1,3 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
-
 SRCS = main.cpp \
         test_1D.cpp \
         test_1D_array.cpp \
@@ -23,18 +18,10 @@ SRCS = main.cpp \
 DEFINES = DONT_TEST_GARBAGE_POINTERS
 
 SOURCES = $(abspath $(SRCS))
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-FRAMEWORK =
-HEADERS = 
+
+include ../../../common.mk
+
 TARGET = test_kernel_image_methods
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -Wshorten-64-to-32 -Os
-CC = c++
-CXX = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%)
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%)
-LIBRARIES = -framework OpenCL -framework OpenGL -framework GLUT -framework AppKit ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}
@@ -43,7 +30,7 @@ TARGETOBJECT =
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
+	$(CXX) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)

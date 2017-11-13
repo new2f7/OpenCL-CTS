@@ -1,8 +1,3 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
-
 SRCS = main.cpp \
 		  helpers.cpp \
 		  test_buffers.cpp \
@@ -19,30 +14,34 @@ SRCS = main.cpp \
 		  test_renderbuffer_info.cpp \
 		  ../images/image_helpers.cpp \
 		  ../../test_common/gl/helpers.cpp \
-		  ../../test_common/gl/setup_osx.cpp \
 		  ../../test_common/harness/conversions.c \
 		  ../../test_common/harness/errorHelpers.c \
 		  ../../test_common/harness/genericThread.cpp \
-		  ../../test_common/harness/imageHelpers.c \
+		  ../../test_common/harness/imageHelpers.cpp \
 		  ../../test_common/harness/kernelHelpers.c \
 		  ../../test_common/harness/mt19937.c \
 		  ../../test_common/harness/testHarness.c \
-		  ../../test_common/harness/threadTesting.c 
-		  
-DEFINES = 
+		  ../../test_common/harness/threadTesting.c
+
+ifdef LINUX
+SRCS +=		  ../../test_common/gl/setup_x11.cpp
+else
+SRCS +=		  ../../test_common/gl/setup_osx.cpp
+endif
+
+DEFINES =
 
 SOURCES = $(abspath $(SRCS))
-LIBPATH += -L/System/Library/Frameworks/OpenCL.framework/Libraries
-LIBPATH += -L.
-FRAMEWORK = $(SOURCES)
-HEADERS = 
+
+INCLUDE = -I.
+
+include ../../common.mk
+
+ifdef LINUX
+LIBRARIES +=  -lGLEW -lglut -lGLU -lGL
+endif
+
 TARGET = test_gl
-INCLUDE = 
-COMPILERFLAGS = -c -Wall -g -Wshorten-64-to-32
-CC = c++
-CFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-CXXFLAGS = $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} $(DEFINES:%=-D%) $(INCLUDE)
-LIBRARIES = -framework OpenCL -framework OpenGL -framework GLUT -framework AppKit ${ATF}
 
 OBJECTS := ${SOURCES:.c=.o}
 OBJECTS := ${OBJECTS:.cpp=.o}
@@ -51,7 +50,7 @@ TARGETOBJECT =
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
+	$(CXX) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)

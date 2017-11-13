@@ -1,11 +1,46 @@
-ifdef BUILD_WITH_ATF
-ATF = -framework ATF
-USE_ATF = -DUSE_ATF
-endif
+SRCS = contractions.c \
+			../../test_common/harness/mt19937.c \
+			../../test_common/harness/rounding_mode.c \
+			../../test_common/harness/errorHelpers.c \
+			../../test_common/harness/kernelHelpers.c
 
-CC = cc
-CFLAGS = -g -gstabs -arch i386 -arch x86_64 -Wall $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF} -I ../../test_common/harness
+SOURCES = $(abspath $(SRCS))
+
+ifdef LINUX
+
+DEFINES = 
+
+include ../../common.mk
+
+TARGET = contractions
+
+INCLUDE += -I../../OpenCL/cl_headers/public
+
+OBJECTS := ${SOURCES:.c=.o}
+
+TARGETOBJECT =
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
+
+clean:
+	rm -f $(TARGET) $(OBJECTS)
+
+.DEFAULT:
+	@echo The target \"$@\" does not exist in Makefile.
+
+else
+
+CFLAGS = -g -gstabs -arch i386 -arch x86_64 -Wall $(COMPILERFLAGS) ${RC_CFLAGS} ${USE_ATF}
+INCLUDES += -I../../test_common/harness
+
 LIBRARIES = -framework OpenCL -framework ApplicationServices -framework IOKit -I/System/Library/Frameworks/OpenCL.framework/Headers ${RC_CFLAGS} ${ATF}
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(RC_CFLAGS) $(OBJECTS) -o $@ $(LIBPATH) $(LIBRARIES)
 
 release:
 	echo "Build Release"
@@ -30,3 +65,5 @@ clean:
 	rm -f ./contractions_debug
 
 all: release
+
+endif
