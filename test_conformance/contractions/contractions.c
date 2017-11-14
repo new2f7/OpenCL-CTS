@@ -55,7 +55,7 @@
 #include <string.h>
 #endif
 
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+#if (defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))) || (defined(__x86_64__) && defined(__linux__))
 #include <xmmintrin.h>
 #endif
 
@@ -110,7 +110,7 @@ static void ReleaseCL( void );
 static int RunTest( int testNumber );
 static int RunTest_Double( int testNumber );
 
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+#if (defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))) || (defined(__x86_64__) && defined(__linux__))
 // defeat x87 on MSVC
 float sse_add(float x, float y)
 {
@@ -733,7 +733,7 @@ static int InitCL( void )
             float q2 = f2[i];
             
             feclearexcept(FE_OVERFLOW);
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+#if (defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))) || (defined(__x86_64__) && defined(__linux__))
             // VS2005 might use x87 for straight multiplies, and we can't
             // turn that off
             f3[i] = sse_mul(q, q2);
@@ -786,7 +786,7 @@ static int InitCL( void )
                 feclearexcept(FE_OVERFLOW);
                 switch (j) 
                 {
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+#if (defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))) || (defined(__x86_64__) && defined(__linux__))
                         // VS2005 might use x87 for straight add/sub, and we can't
                         // turn that off
                     case 0: 
@@ -877,7 +877,7 @@ static int InitCL( void )
             {
                 double q = f[i];
                 double q2 = f2[i];
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+#if (defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))) || (defined(__x86_64__) && defined(__linux__))
                 // VS2005 might use x87 for straight multiplies, and we can't
                 // turn that off
                 f3[i] = sse_mul_sd(q, q2);
@@ -908,7 +908,7 @@ static int InitCL( void )
             // calculate reference results
             for( i = 0; i < BUFFER_SIZE / sizeof( double ); i++ )
             {
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+#if (defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))) || (defined(__x86_64__) && defined(__linux__))
                 // VS2005 might use x87 for straight add/sub, and we can't
                 // turn that off
                 correct_double[0][i] = sse_add_sd(buf3_double[i],buf4_double[i]);
