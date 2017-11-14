@@ -1,6 +1,6 @@
 include_directories( "${CMAKE_SOURCE_DIR}/../test_common/harness")
 
-add_executable(conformance_contractions
+add_executable(contractions
         contractions.c
         ${CMAKE_SOURCE_DIR}/../test_common/harness/mt19937.c
         ${CMAKE_SOURCE_DIR}/../test_common/harness/msvc9.c
@@ -23,5 +23,5 @@ set_source_files_properties(
         PROPERTIES LANGUAGE CXX)
 endif(WIN32)
 
-TARGET_LINK_LIBRARIES(conformance_contractions
+TARGET_LINK_LIBRARIES(contractions
         ${CLConform_LIBRARIES})

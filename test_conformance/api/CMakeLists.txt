@@ -1,4 +1,4 @@
-add_executable(conformance_test_api
+add_executable(test_api
          main.c
          test_bool.c
          test_retain.cpp
@@ -54,5 +54,5 @@ set_source_files_properties(
          ../../test_common/harness/msvc9.c
         PROPERTIES LANGUAGE CXX)
 
-TARGET_LINK_LIBRARIES(conformance_test_api
+TARGET_LINK_LIBRARIES(test_api
         ${CLConform_LIBRARIES})

@@ -1,4 +1,4 @@
-add_executable(conformance_test_cl_fill_images
+add_executable(test_cl_fill_images
 
         main.cpp 
         test_fill_generic.cpp
@@ -42,5 +42,5 @@ set_source_files_properties(
          ../../../test_common/harness/msvc9.c
         PROPERTIES LANGUAGE CXX)
 
-TARGET_LINK_LIBRARIES(conformance_test_cl_fill_images
+TARGET_LINK_LIBRARIES(test_cl_fill_images
         ${CLConform_LIBRARIES})

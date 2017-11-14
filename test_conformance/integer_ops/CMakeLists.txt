@@ -1,4 +1,4 @@
-add_executable(conformance_test_integer_ops
+add_executable(test_integer_ops
         main.c
 			test_popcount.c
 			test_int_basic_ops.c
@@ -39,5 +39,5 @@ set_source_files_properties(
     ../../test_common/harness/msvc9.c
         PROPERTIES LANGUAGE CXX)
 
-TARGET_LINK_LIBRARIES(conformance_test_integer_ops
+TARGET_LINK_LIBRARIES(test_integer_ops
         ${CLConform_LIBRARIES})

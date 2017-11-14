@@ -1,4 +1,4 @@
-add_executable(conformance_test_buffers main.c test_buffer_copy.c
+add_executable(test_buffers main.c test_buffer_copy.c
         test_buffer_read.c test_buffer_write.c test_image_migrate.c test_buffer_migrate.c
 	test_buffer_mem.c array_info.c test_buffer_map.c test_sub_buffers.cpp test_buffer_fill.c
 	../../test_common/harness/errorHelpers.c
@@ -23,5 +23,5 @@ set_source_files_properties(main.c test_buffer_copy.c
     ../../test_common/harness/msvc9.c
     PROPERTIES LANGUAGE CXX)
 
-TARGET_LINK_LIBRARIES(conformance_test_buffers
+TARGET_LINK_LIBRARIES(test_buffers
         ${CLConform_LIBRARIES})

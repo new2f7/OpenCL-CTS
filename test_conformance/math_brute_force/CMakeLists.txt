@@ -1,4 +1,4 @@
-add_executable(conformance_bruteforce
+add_executable(bruteforce
     FunctionList.c
     Sleep.c
     binary.c
@@ -54,5 +54,5 @@ set_source_files_properties(
         COMPILE_FLAGS -O0)
 endif(CMAKE_COMPILER_IS_GNUCC)
 
-TARGET_LINK_LIBRARIES(conformance_bruteforce
+TARGET_LINK_LIBRARIES(bruteforce
     ${CLConform_LIBRARIES})
