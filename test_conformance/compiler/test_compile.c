@@ -135,7 +135,7 @@ const char* include_header_name_templates[4]   = { "#include \"simple_header%d.h
                                                    "#include \"foo/bar/simple_header%d.h\"\n",
                                                    "#include \"foo/bar/baz/simple_header%d.h\"\n"};
 
-const char* compile_extern_var      = "extern constant float foo;\n";
+const char* compile_extern_var      = "extern constant float foo = 0.0f;\n";
 const char* compile_extern_struct   = "extern constant struct bar bart;\n";
 const char* compile_extern_function = "extern int baz(int, int);\n";
 
@@ -143,8 +143,8 @@ const char* compile_static_var      = "static constant float foo = 2.78;\n";
 const char* compile_static_struct   = "static constant struct bar {float x, y, z, r; int color; } foo = {3.14159};\n";
 const char* compile_static_function = "static int foo(int x, int y) { return x*x + y*y; }\n";
 
-const char* compile_regular_var      = "constant float foo;\n";
-const char* compile_regular_struct   = "constant struct bar {float x, y, z, r; int color; } foo;\n";
+const char* compile_regular_var      = "constant float foo = 0.0f;\n";
+const char* compile_regular_struct   = "constant struct bar {float x, y, z, r; int color; } foo = { 0, };\n";
 const char* compile_regular_function = "int foo(int x, int y) { return x*x + y*y; }\n";
 
 const char* link_static_var_access = // use with compile_static_var
