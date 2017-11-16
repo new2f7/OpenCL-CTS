@@ -38,7 +38,7 @@ cl_int cImage_check_mem_host_no_access<T>:: verify_RW_Image()
 {
   this->Init_rect();
   
-  cl_event event = nullptr;
+  cl_event event = NULL;
   size_t img_orig[3] = {0, 0, 0};
   size_t img_region[3] = {0, 0, 0};
   img_region[0] = this->m_cl_Image_desc.image_width;
