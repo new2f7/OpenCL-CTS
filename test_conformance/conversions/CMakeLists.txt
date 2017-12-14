@@ -2,11 +2,9 @@ include_directories( "${CMAKE_SOURCE_DIR}/../test_common/harness")
 
 # VS2005 AMD64 WAR (basic_test_conversions.c causes internal compiler error)
 if(MSVC)
-set(CMAKE_C_FLAGS_RELEASE "/Od /Ob0")
-set(CMAKE_CXX_FLAGS_RELEASE "/Od /Ob0")
+  add_compile_options("/Od" "/Ob0")
 else(MSVC)
-set(CMAKE_C_FLAGS_RELEASE "-O0")
-set(CMAKE_CXX_FLAGS_RELEASE "-O0")
+  add_compile_options("-O0" "-g")
 endif(MSVC)
 
 add_executable(test_conversions
