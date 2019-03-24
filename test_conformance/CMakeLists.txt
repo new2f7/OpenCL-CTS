@@ -4,7 +4,22 @@ project(OpenCL-CTS C CXX)
 
 add_compile_options(-fPIC -Wno-narrowing -fpermissive)
 
-set(CLConform_LIBRARIES OpenCL m pthread)
+if(POCL)
+  add_library(pocl SHARED IMPORTED)
+  set_property(TARGET pocl PROPERTY IMPORTED_LOCATION "${POCL}")
+  set(CLConform_LIBRARIES pocl m pthread)
+else()
+  set(CLConform_LIBRARIES OpenCL m pthread)
+endif()
+
+if(ENABLE_ASAN)
+  set(CLConform_LIBRARIES "asan" ${CLConform_LIBRARIES})
+endif()
+
+if(ENABLE_TSAN)
+  set(CLConform_LIBRARIES "tsan" ${CLConform_LIBRARIES})
+endif()
+
 
 add_subdirectory(allocations)
 add_subdirectory(api)
