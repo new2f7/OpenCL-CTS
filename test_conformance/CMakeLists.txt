@@ -18,7 +18,7 @@ add_compile_options(-fPIC -Wno-narrowing -fpermissive)
 #  set(CLConform_LIBRARIES m pthread)
 #endif()
 
-set(CLConform_LIBRARIES m pthread)
+set(CLConform_LIBRARIES m pthread opencl_lib)
 
 if(ENABLE_ASAN)
   set(CLConform_LIBRARIES "asan" ${CLConform_LIBRARIES})
