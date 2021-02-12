@@ -10,13 +10,15 @@ target_link_libraries(opencl_lib INTERFACE ${OpenCL_LIBRARIES})
 
 add_compile_options(-fPIC -Wno-narrowing -fpermissive)
 
-if(POCL)
-  add_library(pocl SHARED IMPORTED)
-  set_property(TARGET pocl PROPERTY IMPORTED_LOCATION "${POCL}")
-  set(CLConform_LIBRARIES pocl m pthread)
-else()
-  set(CLConform_LIBRARIES OpenCL m pthread)
-endif()
+#if(POCL)
+#  add_library(pocl SHARED IMPORTED)
+#  set_property(TARGET pocl PROPERTY IMPORTED_LOCATION "${POCL}")
+#  set(CLConform_LIBRARIES pocl m pthread)
+#else()
+#  set(CLConform_LIBRARIES m pthread)
+#endif()
+
+set(CLConform_LIBRARIES m pthread)
 
 if(ENABLE_ASAN)
   set(CLConform_LIBRARIES "asan" ${CLConform_LIBRARIES})
