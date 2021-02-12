@@ -28,3 +28,9 @@ set_source_files_properties(
 
 TARGET_LINK_LIBRARIES(test_allocations
         ${CLConform_LIBRARIES})
+
+set_target_properties(test_allocations PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)
