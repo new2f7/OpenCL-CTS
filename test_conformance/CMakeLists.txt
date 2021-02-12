@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.0)
 
 project(OpenCL-CTS C CXX)
 
+find_package(OpenCL REQUIRED)
+add_library(opencl_lib INTERFACE)
+target_include_directories(opencl_lib INTERFACE ${OpenCL_INCLUDE_DIRS})
+#target_compile_options(opencl_lib INTERFACE "")
+target_link_libraries(opencl_lib INTERFACE ${OpenCL_LIBRARIES})
+
 add_compile_options(-fPIC -Wno-narrowing -fpermissive)
 
 if(POCL)
