@@ -4,14 +4,15 @@ project(OpenCL-CTS C CXX)
 
 add_compile_options(-fPIC -Wno-narrowing -fpermissive)
 
-if(POCL)
+if(ENABLE_ICD)
+  include_directories("../../../../../../include/")
+  link_libraries("${CTS_OPENCL_LIBRARY}")
+  set(CLConform_LIBRARIES m pthread) #OpenCL
+else()
   add_library(pocl SHARED IMPORTED)
-  set_property(TARGET pocl PROPERTY IMPORTED_LOCATION "${POCL}")
+  set_property(TARGET pocl PROPERTY IMPORTED_LOCATION "${CTS_OPENCL_LIBRARY}")
   target_include_directories(pocl INTERFACE "../../../../../../include/")
   set(CLConform_LIBRARIES pocl m pthread)
-else()
-  include_directories("../../../../../../include/")
-  set(CLConform_LIBRARIES OpenCL m pthread)
 endif()
 
 if(ENABLE_ASAN)
